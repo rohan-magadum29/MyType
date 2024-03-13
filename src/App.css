@@ -1,38 +1,68 @@
-.App {
+*{
+    background-color: black;
+    color : white;
+    text-align: center;
+}
+.btnPlay{
+font-size: 2.5rem;
+margin: 20px;
+border-radius: 15px;
+}
+.playing {
+  height:100hv;
+  display:grid;
   text-align: center;
+  gap: 10px;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.playing .list {
+  list-style: none;
+  background-color: black;
+  color:white;
+  border-radius:10px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.playing li{
+  display : inline-block;
+  font-size: 2rem;
+  padding:10px;
+  text-shadow: 0 2px 2px black;
+  position:relative;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.playing input{
+  width:100%;
+  padding:20px 0;
+  outline:none;
+  font-size:1.5rem;
+  background-color: rgb(20, 20, 20);
+  border-radius: 10px;
+  text-align: center;
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.playing li.true { 
+  color : rgb(0, 255, 0);
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.playing li.false{
+  color : rgb(255, 0, 0);
+}
+.title {
+  font-size: 5rem;
+  display: inline-block;
+  margin:20px;
+}
+.number {
+  display: inline-block;
+  font-size: 2.5rem;
+}
+.stats-txt{
+  margin-top: 50px;
+  font-size: 2rem;
+}
+.btnPlayAgain{
+  font-size: 2.5rem;
+  margin-top: 50px;
+  padding: 10px;
+  border-radius: 15px;
   }
-  to {
-    transform: rotate(360deg);
-  }
+.timer-txt{
+  color: rgb(255, 255, 255);
+  font-size: x-large;
 }
