@@ -4,13 +4,14 @@ import "./App.css";
 import Home from "./components/Home";
 import PlayGame from "./components/PlayGame";
 import EndGame from "./components/EndGame";
-
+import Login from "./components/Login.js";
+import Register from "./components/Register.js"
 import { useEffect, useState } from "react";
 
 function App() {
   const [statusGame, setStatusGame] = useState("Home");
   const [score, setScore] = useState(null);
-  const time = 15;
+  const time = 30;
   const [timer, setTimer] = useState(time);
   const resetTimer = () => {
     setTimer(time)
@@ -63,8 +64,14 @@ function App() {
     case "endGame":
       layout = <EndGame score={score} onGame={handleChangeStatusGame} resetTimer={resetTimer} time = {time}/>;
       break;
+    case "login":
+      layout = <Login ChangeState={handleChangeStatusGame}></Login>
+      break;
+    case "register":
+      layout = <Register ChangeState={handleChangeStatusGame}></Register>
+      break;
     default:
-      layout = <Home onGame={handleChangeStatusGame} />;
+      layout = <Home ChangeState={handleChangeStatusGame} />;
       break;
   }
   return (
