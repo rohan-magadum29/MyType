@@ -1,3 +1,4 @@
+import React from "react"
 const EndGame = ({score,onGame,resetTimer,time}) => {
     const handlePlayAgain = () => {
         onGame('playGame');
