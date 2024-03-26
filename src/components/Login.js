@@ -1,6 +1,6 @@
 import React,{useState} from "react"
-
-const Login = ({ChangeState}) => {
+import axios from 'axios'
+const Login = ({ChangeState,setLoginUser}) => {
     const [user,setUser] = useState({
         email:"",
         password:"",
@@ -13,6 +13,14 @@ const Login = ({ChangeState}) => {
         })
         
     }
+    const login = () => {
+        axios.post("http://localhost:9002/login",user).then(res=> {
+                alert(res.data.message)
+                setLoginUser(res.data.user)
+                ChangeState("home")
+            }
+        )
+    }
     return (
         <div className="login">
             <h1>Login</h1>
@@ -21,7 +29,7 @@ const Login = ({ChangeState}) => {
             <input type="password" placeholder="Enter your password" name="password" value={user.password} onChange={handleChange}>
             </input>
             <br/>
-            <button className="login-btn">Login</button>
+            <button className="login-btn" onClick={login}>Login</button>
             <div>Not Registered? Registere Here</div>
             <button className="register-btn"
             onClick={()=>{

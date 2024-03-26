@@ -19,7 +19,20 @@ const userSchema = new mongoose.Schema({
 const User = new mongoose.model("User",userSchema)
 //Routes
 app.post("/login",(req,res)=>{
-    res.send("My API")
+    const {email,password} = req.body
+    User.findOne({email:email}).exec().then(user=> {
+        if(user){
+            if(password === user.password){
+                res.send({message:"Login Successful",user:user})
+            }
+            else {
+                res.send({message:"User Credentials are incorrect"})
+            }
+        }
+        else{
+            res.send({message:"User is not Registered"})
+        }
+    })
 })
 app.post("/register",(req,res)=>{
     const {email,password} = req.body

@@ -16,7 +16,11 @@ const Register = ({ ChangeState }) => {
   const register = () => {
     const { email, password, confirmPassword } = user;
     if (email && password && password === confirmPassword) {
-      axios.post("http://localhost:9002/register", user).then(res => console.log(res))
+      axios.post("http://localhost:9002/register", user).then(res => alert(res.data.message))
+    }
+    else if (password !== confirmPassword)
+    {
+      alert("Password and Confirm Password Do not match")
     }
     else {
         alert("Invalid Input")

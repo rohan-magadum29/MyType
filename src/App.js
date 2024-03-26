@@ -9,7 +9,8 @@ import Register from "./components/Register.js"
 import { useEffect, useState } from "react";
 
 function App() {
-  const [statusGame, setStatusGame] = useState("Home");
+  const [user,setLoginUser] = useState({})
+  const [statusGame, setStatusGame] = useState("home");
   const [score, setScore] = useState(null);
   const time = 30;
   const [timer, setTimer] = useState(time);
@@ -65,13 +66,18 @@ function App() {
       layout = <EndGame score={score} onGame={handleChangeStatusGame} resetTimer={resetTimer} time = {time}/>;
       break;
     case "login":
-      layout = <Login ChangeState={handleChangeStatusGame}></Login>
+      layout = <Login ChangeState={handleChangeStatusGame} setLoginUser = {setLoginUser}/>
       break;
     case "register":
-      layout = <Register ChangeState={handleChangeStatusGame}></Register>
+      layout = <Register ChangeState={handleChangeStatusGame}/>
       break;
-    default:
-      layout = <Home ChangeState={handleChangeStatusGame} />;
+    case "home":
+      if(user && user._id) {
+        layout = <Home />
+      }
+      else {
+        layout = <Login ChangeState={handleChangeStatusGame} setLoginUser = {setLoginUser}/>
+      }
       break;
   }
   return (
