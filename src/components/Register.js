@@ -2,20 +2,21 @@ import React, { useState } from "react";
 import axios from "axios";
 const Register = ({ ChangeState }) => {
   const [user, setUser] = useState({
+    username:"",
     email: "",
     password: "",
     confirmPassword: "",
   });
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const {name, value } = e.target;
     setUser({
       ...user,
       [name]: value,
     });
   };
   const register = () => {
-    const { email, password, confirmPassword } = user;
-    if (email && password && password === confirmPassword) {
+    const { username,email, password, confirmPassword } = user;
+    if (username && email && password && password === confirmPassword) {
       axios.post("http://localhost:9002/register", user).then(res => alert(res.data.message))
     }
     else if (password !== confirmPassword)
@@ -29,6 +30,13 @@ const Register = ({ ChangeState }) => {
   return (
     <div className="register">
       <h1>Register</h1>
+      <input
+        type="text"
+        name="username"
+        placeholder="Enter your Username"
+        value={user.username}
+        onChange={handleChange}
+      ></input>
       <input
         type="email"
         name="email"

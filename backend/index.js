@@ -13,6 +13,7 @@ mongoose.connect("mongodb://localhost:27017/MyType",{
 })
 
 const userSchema = new mongoose.Schema({
+    username:String,
     email:String,
     password:String
 })
@@ -35,13 +36,14 @@ app.post("/login",(req,res)=>{
     })
 })
 app.post("/register",(req,res)=>{
-    const {email,password} = req.body
+    const {username,email,password} = req.body
     User.findOne({email:email}).exec().then(user=>{
         if(user){
             res.send({message:"User already registered"})
         }
         else {
             const user = new User({
+                username,
                 email,
                 password
             })
