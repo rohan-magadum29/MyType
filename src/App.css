@@ -66,3 +66,34 @@ border-radius: 15px;
   color: rgb(255, 255, 255);
   font-size: x-large;
 }
+.login {
+  margin-top: 8%;
+}
+.login input {
+  padding: 10px;
+  margin : 5px;
+}
+.login button {
+  padding:5px 10px; 
+  margin:10px;
+}
+
+.register {
+  margin-top: 8%;
+}
+.register input {
+  padding: 10px;
+  margin : 5px;
+}
+.register button {
+  padding:5px 10px; 
+  margin:10px;
+}
+.navbar {
+  display: flex;
+  justify-content: end;
+  padding: 5px;
+}
+.navbar button {
+ margin: 10px;
+}

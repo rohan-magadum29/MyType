@@ -11,79 +11,38 @@ import { useEffect, useState } from "react";
 function App() {
   const [user,setLoginUser] = useState({})
   const [statusGame, setStatusGame] = useState("home");
-  const [score, setScore] = useState(null);
-  const time = 30;
-  const [timer, setTimer] = useState(time);
-  const resetTimer = () => {
-    setTimer(time)
-  }
-  useEffect(() => {
-    if(statusGame === "playGame"){
-      const intervalId = setInterval(() => {
-        setTimer((prevTimer) => {
-          if (prevTimer > 0) {
-            return prevTimer - 1;
-          } else {
-            clearInterval(intervalId);
-            setStatusGame("endGame");
-            return 0;
-          }
-        });
-      }, 1000);
-      return () => clearInterval(intervalId);
-    }
-  },[statusGame]);
-  useEffect(() => {
-    if (statusGame === "playGame") {
-      setScore({
-        right: 0,
-        wrong: 0,
-      });
-    }
-  }, [statusGame]);
-  const handleChangeStatusGame = (status) => {
+  const [props, setProps] = useState({})
+  const handleChangeStatusGame = (status,props) => {
     setStatusGame(status);
+    setProps(props);
   };
-  const handleChangeScore = (type) => {
-    if (type === "right") {
-      setScore({
-        ...score,
-        right: score.right + 1,
-      });
-    } else {
-      setScore({
-        ...score,
-        wrong: score.wrong + 1,
-      });
-    }
-  };
+  
   let layout;
   switch (statusGame) {
     case "playGame":
-      layout = <PlayGame onChangeScore={handleChangeScore} />;
+      layout = <PlayGame status ={statusGame} ChangeState={handleChangeStatusGame} props= {props}/>;
       break;
     case "endGame":
-      layout = <EndGame score={score} onGame={handleChangeStatusGame} resetTimer={resetTimer} time = {time}/>;
+      layout = <EndGame  ChangeState={handleChangeStatusGame} props= {props}/>;
       break;
     case "login":
-      layout = <Login ChangeState={handleChangeStatusGame} setLoginUser = {setLoginUser}/>
+      layout = <Login ChangeState={handleChangeStatusGame} setLoginUser = {setLoginUser} props= {props}/>
       break;
     case "register":
-      layout = <Register ChangeState={handleChangeStatusGame}/>
+      layout = <Register ChangeState={handleChangeStatusGame} props= {props}/>
       break;
     case "home":
       if(user && user._id) {
-        layout = <Home />
+        layout = <Home ChangeState={handleChangeStatusGame} user = {user} props= {props}/>
       }
       else {
-        layout = <Login ChangeState={handleChangeStatusGame} setLoginUser = {setLoginUser}/>
+        layout = <Login ChangeState={handleChangeStatusGame} setLoginUser = {setLoginUser} props= {props}/>
       }
       break;
   }
   return (
     <div className="App">
       {layout}
-      {statusGame === "playGame" && <div className="timer-txt">{timer}</div>}
     </div>
   );
 }

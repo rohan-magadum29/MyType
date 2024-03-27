@@ -1,10 +1,11 @@
 import React from "react"
-const Home = ({ ChangeState }) => {
+import Navbar from "./NavBar";
+const Home = ({ ChangeState,user}) => {
   return (
     <div>
       <div className="home">
+      <Navbar ChangeState = {ChangeState} user = {user}/>
         <h1 className="title"> MyType </h1>
-        <button onClick={()=>ChangeState('login')}>Login/Register</button>
       </div>
       <div>
         <button className="btnPlay" onClick={() => ChangeState("playGame")}>

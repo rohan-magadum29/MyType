@@ -30,7 +30,7 @@ const Login = ({ChangeState,setLoginUser}) => {
             </input>
             <br/>
             <button className="login-btn" onClick={login}>Login</button>
-            <div>Not Registered? Registere Here</div>
+            <div>Not Registered? Register Here</div>
             <button className="register-btn"
             onClick={()=>{
                 ChangeState('register')
