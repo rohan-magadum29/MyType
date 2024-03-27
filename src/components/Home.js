@@ -8,7 +8,7 @@ const Home = ({ ChangeState,user}) => {
         <h1 className="title"> MyType </h1>
       </div>
       <div>
-        <button className="btnPlay" onClick={() => ChangeState("playGame")}>
+        <button className="btnPlay" onClick={() => ChangeState("playGame",user)}>
           Play Game
         </button>
       </div>

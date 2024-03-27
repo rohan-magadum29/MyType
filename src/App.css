@@ -53,14 +53,16 @@ border-radius: 15px;
   font-size: 2.5rem;
 }
 .stats-txt{
-  margin-top: 50px;
+  margin:40px 20px ;
   font-size: 2rem;
+  background-color: rgb(30, 30, 30);
 }
 .btnPlayAgain{
   font-size: 2.5rem;
   margin-top: 50px;
   padding: 10px;
   border-radius: 15px;
+  background-color: rgb(30, 30, 30);
   }
 .timer-txt{
   color: rgb(255, 255, 255);
@@ -96,4 +98,12 @@ border-radius: 15px;
 }
 .navbar button {
  margin: 10px;
+}
+.stats {
+  display: inline-block;
+  margin-top: 20px;
+  border-radius: 30px;
+  border: 2px solid white;
+  padding: 20px;
+  background-color: rgb(30, 30, 30);
 }

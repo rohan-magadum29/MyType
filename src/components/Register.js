@@ -29,7 +29,6 @@ const Register = ({ ChangeState }) => {
   return (
     <div className="register">
       <h1>Register</h1>
-      
       <input
         type="email"
         name="email"
