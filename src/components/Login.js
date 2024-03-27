@@ -2,6 +2,7 @@ import React,{useState} from "react"
 import axios from 'axios'
 const Login = ({ChangeState,setLoginUser}) => {
     const [user,setUser] = useState({
+        username:"",
         email:"",
         password:"",
     })

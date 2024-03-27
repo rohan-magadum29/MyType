@@ -7,6 +7,7 @@ import EndGame from "./components/EndGame";
 import Login from "./components/Login.js";
 import Register from "./components/Register.js"
 import { useEffect, useState } from "react";
+import Navbar from "./components/NavBar.js";
 function App() {
   const [user,setLoginUser] = useState({})
   const [statusGame, setStatusGame] = useState("home");
@@ -31,8 +32,8 @@ function App() {
       layout = <Register ChangeState={handleChangeStatusGame} props= {props}/>
       break;
     case "home":
-      if(user && user._id) {
-        layout = <Home ChangeState={handleChangeStatusGame} user = {user} props= {props}/>
+      if(user) {
+        layout = <Home ChangeState={handleChangeStatusGame} user= {user} props= {props}/>
       }
       else {
         layout = <Login ChangeState={handleChangeStatusGame} setLoginUser = {setLoginUser} props= {props}/>
@@ -41,6 +42,7 @@ function App() {
   }
   return (
     <div className="App">
+      <Navbar ChangeState={handleChangeStatusGame} user={user}/>
       {layout}
     </div>
   );
