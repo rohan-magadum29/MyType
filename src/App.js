@@ -7,7 +7,6 @@ import EndGame from "./components/EndGame";
 import Login from "./components/Login.js";
 import Register from "./components/Register.js"
 import { useEffect, useState } from "react";
-
 function App() {
   const [user,setLoginUser] = useState({})
   const [statusGame, setStatusGame] = useState("home");
@@ -20,7 +19,7 @@ function App() {
   let layout;
   switch (statusGame) {
     case "playGame":
-      layout = <PlayGame status ={statusGame} ChangeState={handleChangeStatusGame} props= {props}/>;
+      layout = <PlayGame status ={statusGame} ChangeState={handleChangeStatusGame} />;
       break;
     case "endGame":
       layout = <EndGame  ChangeState={handleChangeStatusGame} props= {props}/>;

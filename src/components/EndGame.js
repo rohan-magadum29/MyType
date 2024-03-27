@@ -6,8 +6,8 @@ const EndGame = (props) => {
   const resetTimer = props.props.resetTimer;
   const ChangeState = props.props.ChangeState;
   const handlePlayAgain = () => {
-    ChangeState("playGame");
     resetTimer();
+    ChangeState("playGame");
   };
 
   const rightScore = score.right;

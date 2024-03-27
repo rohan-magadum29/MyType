@@ -1,16 +1,22 @@
-import React from "react"
+import React from "react";
 import Navbar from "./NavBar";
-const Home = ({ ChangeState,user}) => {
+import { useState } from "react";
+const Home = ({ ChangeState}) => {
+  
   return (
     <div>
       <div className="home">
-      <Navbar ChangeState = {ChangeState} user = {user}/>
+        <Navbar ChangeState={ChangeState} />
         <h1 className="title"> MyType </h1>
       </div>
       <div>
-        <button className="btnPlay" onClick={() => ChangeState("playGame",user)}>
-          Play Game
+        <button
+          className="btnPlay"
+          onClick={() => ChangeState("playGame")}
+        >
+          Play
         </button>
+        
       </div>
     </div>
   );

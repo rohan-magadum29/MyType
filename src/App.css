@@ -110,3 +110,9 @@ border-radius: 15px;
   padding: 20px;
   background-color: rgb(30, 30, 30);
 }
+.greeting p {
+  display : inline-block;
+}
+.timer-radio {
+  font-size: 20px;
+}

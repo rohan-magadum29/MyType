@@ -6,7 +6,7 @@ const Navbar = ({ ChangeState, user }) => {
       {!user ? (
         <button onClick={() => ChangeState("login")}>Login / Register</button>
       ) : (
-        <div>
+        <div className="greeting">
           <p>Hello {user.username}</p>
           <button onClick={()=> ChangeState("login")}>Log Out</button>
         </div>
