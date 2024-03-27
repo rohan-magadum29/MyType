@@ -20,7 +20,7 @@ function App() {
   let layout;
   switch (statusGame) {
     case "playGame":
-      layout = <PlayGame status ={statusGame} ChangeState={handleChangeStatusGame} />;
+      layout = <PlayGame status ={statusGame} ChangeState={handleChangeStatusGame} user={user}/>;
       break;
     case "endGame":
       layout = <EndGame  ChangeState={handleChangeStatusGame} props= {props}/>;
@@ -32,7 +32,7 @@ function App() {
       layout = <Register ChangeState={handleChangeStatusGame} props= {props}/>
       break;
     case "home":
-      if(user) {
+      if(user && user._id) {
         layout = <Home ChangeState={handleChangeStatusGame} user= {user} props= {props}/>
       }
       else {

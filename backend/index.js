@@ -17,7 +17,24 @@ const userSchema = new mongoose.Schema({
     email:String,
     password:String
 })
+const gameSchema = new mongoose.Schema({
+    email:{
+        type:String,
+        required:true
+    },
+    accuracy:{
+        type:Number,
+    },
+    speed:{
+        type:Number,
+        required:true
+    }
+
+})
+
 const User = new mongoose.model("User",userSchema)
+const Game = new mongoose.model("Game",gameSchema)
+
 //Routes
 app.post("/login",(req,res)=>{
     const {email,password} = req.body
@@ -57,4 +74,27 @@ app.post("/register",(req,res)=>{
 })
 app.listen(9002,()=>{
     console.log("Started at port 9002")
+})
+
+app.post("/game",async (req,res) => {
+    try {
+        const {email,accuracy,speed} = req.body;
+        const game = new Game({email,accuracy,speed})
+        await game.save();
+        res.status(201).json(game);
+    }
+    catch(err)
+    {
+        res.status(500).json({message:err.message});
+    }
+})
+
+app.get("/games",async (req,res) => {
+    try {
+        const recentGames = await Game.find().sort({createdAt:-1}).limit(10);
+        res.json(recentGames);
+    }
+    catch(error){
+        res.status(500).json({message:error.message});
+    }
 })

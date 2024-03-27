@@ -6,13 +6,12 @@ const Home = ({ ChangeState,user}) => {
   return (
     <div>
       <div className="home">
-        {/* <Navbar ChangeState={ChangeState} user={user}/> */}
         <h1 className="title"> MyType </h1>
       </div>
       <div>
         <button
           className="btnPlay"
-          onClick={() => ChangeState("playGame")}
+          onClick={() => ChangeState("playGame",user)}
         >
           Play
         </button>
