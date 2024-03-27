@@ -18,6 +18,7 @@ const Register = ({ ChangeState }) => {
     const { username,email, password, confirmPassword } = user;
     if (username && email && password && password === confirmPassword) {
       axios.post("http://localhost:9002/register", user).then(res => alert(res.data.message))
+      ChangeState("login")
     }
     else if (password !== confirmPassword)
     {
