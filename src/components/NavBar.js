@@ -6,7 +6,10 @@ const Navbar = ({ ChangeState, user }) => {
       {!user ? (
         <button onClick={() => ChangeState("login")}>Login / Register</button>
       ) : (
-        <p>Hello {user.email}</p>
+        <div>
+          <p>Hello {user.email}</p>
+          <button onClick={()=> ChangeState("login")}>Log Out</button>
+        </div>
       )}
     </div>
   );

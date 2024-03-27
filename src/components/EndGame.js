@@ -25,8 +25,11 @@ const EndGame = (props) => {
         </div>
       </div>
       <div>
-      <button className="btnPlayAgain" onClick={handlePlayAgain}>
+      <button className="btnEnd" onClick={handlePlayAgain}>
         Play Again
+      </button>
+      <button className="btnEnd" onClick={()=>ChangeState("home")}>
+        Home
       </button>
       </div>
     </div>

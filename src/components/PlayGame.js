@@ -16,7 +16,7 @@ const PlayGame = ({ statusGame, ChangeState,user }) => {
     right : 0,
     wrong : 0
   });
-  const time = 30;
+  const time = 10;
   const [timer, setTimer] = useState(time);
   const resetTimer = () => {
     setTimer(time);
