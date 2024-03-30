@@ -15,15 +15,18 @@ const EndGame = (props) => {
   const rightScore = score.right;
   const wrongScore = score.wrong;
   let accuracy = ((rightScore / (rightScore + wrongScore)) * 100).toFixed(0);
+  if(accuracy === "NaN"){
+    accuracy = 0;
+  }
   let speed = (rightScore + wrongScore) / (time / 60);
   const storeGameData = async () => {
+    const gameData = {
+      username:user.username,
+      email: user.email,
+      accuracy,
+      speed,
+    };
     try {
-      const gameData = {
-        username:user.username,
-        email: user.email,
-        accuracy,
-        speed,
-      };
       const response = axios.post("http://localhost:9002/game", gameData);
       console.log("Game Data Stored ", response.data);
     } catch (error) {

@@ -72,7 +72,6 @@ const PlayGame = ({ChangeState,user}) => {
   }, [UserTyping.position]);
   const handleChangeTyping = (e) => {
     const valueInput = e.target.value;
-    console.log(valueInput);
     if (!valueInput.includes(" ")) {
       setUserTyping({
         ...UserTyping,
