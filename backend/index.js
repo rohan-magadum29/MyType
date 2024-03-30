@@ -49,19 +49,22 @@ app.post("/login",(req,res)=>{
                 res.status(200).send({message:"Login Successful",user:user})
             }
             else {
-                res.send({message:"User Credentials are incorrect"})
+                res.status(401).send({message:"User Credentials are incorrect"})
             }
         }
         else{
-            res.send({message:"User is not Registered"})
+            res.status(404).send({message:"User is not Registered"})
         }
+    })
+    .catch(error => {
+        res.status(500).send({message:"Internal Server Error"})
     })
 })
 app.post("/register",(req,res)=>{
     const {username,email,password} = req.body
     User.findOne({email:email}).exec().then(user=>{
         if(user){
-            res.send({message:"User already registered"})
+            res.status(409).send({message:"User already registered"})
         }
         else {
             const user = new User({
@@ -70,9 +73,10 @@ app.post("/register",(req,res)=>{
                 password
             })
             user.save().then(savedInstance=>{
-                res.send({message:"Successfully Registered"})
+                res.status(201).send({message:"Successfully Registered"})
             }).catch(error=>{
                 console.error('Error Saving Instance',error)
+                res.status(500).send({message:"Internal Server Error"})
             })
         }
     })

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Register = ({ ChangeState }) => {
   const [user, setUser] = useState({
     username:"",
@@ -14,18 +16,71 @@ const Register = ({ ChangeState }) => {
       [name]: value,
     });
   };
-  const register = () => {
+  const register = async () => {
     const { username,email, password, confirmPassword } = user;
     if (username && email && password && password === confirmPassword) {
-      axios.post("http://localhost:9002/register", user).then(res => alert(res.data.message))
-      ChangeState("login")
+      try {
+        const res = await axios.post("http://localhost:9002/register", user)
+        if(res.status === 201)
+        {
+          toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Bounce,
+            onClose: () => {
+              ChangeState("login")
+            },
+          });
+        }
+      }
+      catch(error)
+      {
+        toast.error(error.response.data.message, {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+          });
+      }
+      
     }
     else if (password !== confirmPassword)
     {
-      alert("Password and Confirm Password Do not match")
+      toast.error("Password Do not match", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+        });
     }
     else {
-        alert("Invalid Input")
+      toast.error("Please Enter All Fields", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+        });
     }
   };
   return (
@@ -65,6 +120,7 @@ const Register = ({ ChangeState }) => {
       <button onClick={register} className="register-btn">
         Register
       </button>
+      <ToastContainer />
       <p>Already Registered? Login Here</p>
       <button
         onClick={() => {
