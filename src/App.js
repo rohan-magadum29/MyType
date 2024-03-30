@@ -8,8 +8,9 @@ import Login from "./components/Login.js";
 import Register from "./components/Register.js"
 import { useEffect, useState } from "react";
 import Navbar from "./components/NavBar.js";
+import WPMDisplay from "./components/WPMDisplay.js"
 function App() {
-  const [user,setLoginUser] = useState({})
+  const [user,setLoginUser] = useState(null)
   const [statusGame, setStatusGame] = useState("home");
   const [props, setProps] = useState({})
   const handleChangeStatusGame = (status,props) => {
@@ -42,7 +43,8 @@ function App() {
   }
   return (
     <div className="App">
-      <Navbar ChangeState={handleChangeStatusGame} user={user}/>
+      {user ? 
+      <Navbar ChangeState={handleChangeStatusGame} user={user}/> : <div></div>}
       {layout}
     </div>
   );

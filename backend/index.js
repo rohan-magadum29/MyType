@@ -18,6 +18,10 @@ const userSchema = new mongoose.Schema({
     password:String
 })
 const gameSchema = new mongoose.Schema({
+    username : {
+        type:String,
+        required:true
+    },
     email:{
         type:String,
         required:true
@@ -41,7 +45,7 @@ app.post("/login",(req,res)=>{
     User.findOne({email:email}).exec().then(user=> {
         if(user){
             if(password === user.password){
-                res.send({message:"Login Successful",user:user})
+                res.status(200).send({message:"Login Successful",user:user})
             }
             else {
                 res.send({message:"User Credentials are incorrect"})
@@ -78,8 +82,8 @@ app.listen(9002,()=>{
 
 app.post("/game",async (req,res) => {
     try {
-        const {email,accuracy,speed} = req.body;
-        const game = new Game({email,accuracy,speed})
+        const {username,email,accuracy,speed} = req.body;
+        const game = new Game({username,email,accuracy,speed})
         await game.save();
         res.status(201).json(game);
     }
@@ -90,11 +94,29 @@ app.post("/game",async (req,res) => {
 })
 
 app.get("/games",async (req,res) => {
+    const {email} = req.query;
     try {
-        const recentGames = await Game.find().sort({createdAt:-1}).limit(10);
+        const recentGames = await Game.find({email}).sort({createdAt:-1}).limit(10);
         res.json(recentGames);
     }
     catch(error){
         res.status(500).json({message:error.message});
+    }
+})
+
+app.get("/leaderboard",async (req,res) => {
+    try {
+        const games = await Game.find().sort({speed:-1}).limit(10);
+        const leaderboard = games.map((game,index)=>({
+            rank : index + 1,
+            username:game.username,
+            speed:game.speed
+        }));
+        res.json(leaderboard)
+    }
+    catch(error)
+    {
+        console.log("Error fetching leaderboard",error);
+        res.status(500).json({message:"Internal Server Error"})
     }
 })

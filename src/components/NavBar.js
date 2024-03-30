@@ -8,7 +8,7 @@ const Navbar = ({ ChangeState, user }) => {
       ) : (
         <div className="greeting">
           <p>Hello {user.username}</p>
-          <button onClick={()=> ChangeState("login")}>Log Out</button>
+          <button onClick={()=> ChangeState("login")}>Login/Register</button>
         </div>
       )}
     </div>

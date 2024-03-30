@@ -7,6 +7,9 @@
 font-size: 2.5rem;
 margin: 20px;
 border-radius: 15px;
+padding: 5px 25px;
+background-color: rgb(70, 70, 70);
+
 }
 .playing {
   height:100hv;
@@ -59,7 +62,7 @@ border-radius: 15px;
 }
 .btnEnd{
   font-size: 2.5rem;
-  margin-top: 50px;
+  margin-top: 30px;
   padding: 10px;
   margin-left: 5px;
   margin-right: 5px;
@@ -72,26 +75,65 @@ border-radius: 15px;
   font-size: x-large;
 }
 .login {
-  margin-top: 8%;
+  margin: auto;
+  margin-top: 100px;
+  border-radius: 15px;
+  padding: 30px 60px;
+  background-color: rgb(45, 45, 45);
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+}
+
+.login h1{
+  background-color: rgb(45, 45, 45);
+  font-size: 3rem;
+}
+.login p{
+  margin: 0;
+  background-color: rgb(45, 45, 45);
+
 }
 .login input {
-  padding: 10px;
+  padding: 15px;
   margin : 5px;
+  border-radius: 7px;
 }
 .login button {
-  padding:5px 10px; 
+  padding:10px 20px; 
   margin:10px;
+  border-radius: 7px;
 }
 
 .register {
-  margin-top: 8%;
+  margin: auto;
+  margin-top: 100px;
+  border-radius: 15px;
+  padding: 30px 60px;
+  background-color: rgb(45, 45, 45);
+
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+}
+.register h1 {
+  background-color: rgb(45, 45, 45);
+
+  font-size: 3rem;
+}
+.register p{
+  background-color: rgb(45, 45, 45);
+
+  margin: 0;
 }
 .register input {
+  border-radius: 10px;
   padding: 10px;
   margin : 5px;
 }
 .register button {
-  padding:5px 10px; 
+  border-radius: 7px;
+  padding:10px 20px; 
   margin:10px;
 }
 .navbar {
@@ -115,4 +157,36 @@ border-radius: 15px;
 }
 .timer-radio {
   font-size: 20px;
+}
+.WPM {
+  font-size: 16px;
+  font-weight: bold;
+}
+.leaderboard {
+  text-align: center;
+}
+.leaderboard-table{
+  margin: 0 auto;
+}
+.leaderboard-header{
+  padding: 20px 150px ; 
+  background-color: rgb(30, 30, 30);
+}
+.leaderboard-data{
+  padding: 10px ;
+  font-size: 20px;
+}
+.leaderboard-title{
+  font-size: 40px;
+}
+.current-user td {
+  background-color: green;
+}
+.other-user td{
+  background-color: rgb(10, 10, 10);
+}
+.navbar button{
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgb(70, 70, 70);
 }

@@ -19,6 +19,7 @@ const EndGame = (props) => {
   const storeGameData = async () => {
     try {
       const gameData = {
+        username:user.username,
         email: user.email,
         accuracy,
         speed,

@@ -65,7 +65,7 @@ const Register = ({ ChangeState }) => {
       <button onClick={register} className="register-btn">
         Register
       </button>
-      <div>Already Registered? Login Here</div>
+      <p>Already Registered? Login Here</p>
       <button
         onClick={() => {
           ChangeState("login");

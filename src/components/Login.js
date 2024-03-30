@@ -15,12 +15,21 @@ const Login = ({ChangeState,setLoginUser}) => {
         
     }
     const login = () => {
-        axios.post("http://localhost:9002/login",user).then(res=> {
+        try {
+            axios.post("http://localhost:9002/login",user).then(res=> {
                 alert(res.data.message)
-                setLoginUser(res.data.user)
-                ChangeState("home")
+                if(res.status === 200)
+                {
+                    setLoginUser(res.data.user)
+                    ChangeState("home")
+                }
             }
         )
+        }
+        catch(error){
+            console.log(error);
+        }
+        
     }
     return (
         <div className="login">
@@ -31,7 +40,7 @@ const Login = ({ChangeState,setLoginUser}) => {
             </input>
             <br/>
             <button className="login-btn" onClick={login}>Login</button>
-            <div>Not Registered? Register Here</div>
+            <p>Not Registered? Register Here</p>
             <button className="register-btn"
             onClick={()=>{
                 ChangeState('register')

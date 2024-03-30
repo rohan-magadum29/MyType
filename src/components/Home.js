@@ -1,6 +1,8 @@
 import React from "react";
 import Navbar from "./NavBar";
 import { useState } from "react";
+import WPMDisplay from "./WPMDisplay";
+import LeaderBoard from "./LeaderBoard";
 const Home = ({ ChangeState,user}) => {
   
   return (
@@ -15,8 +17,9 @@ const Home = ({ ChangeState,user}) => {
         >
           Play
         </button>
-        
       </div>
+      <WPMDisplay userEmail={user.email}/>
+      <LeaderBoard username={user.username}/>
     </div>
   );
 };
