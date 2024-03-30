@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useEffect, useRef, useState } from "react";
 import Navbar from "./NavBar";
+import TimerContext from "../contexts/TimerContext";
 
 const PlayGame = ({ChangeState,user}) => {
   
@@ -17,7 +18,8 @@ const PlayGame = ({ChangeState,user}) => {
     right : 0,
     wrong : 0
   });
-  const time = 15;
+  const {selectedTime} = useContext(TimerContext);
+  const time = selectedTime;
   const [timer, setTimer] = useState(time);
   const resetTimer = () => {
     setTimer(time);

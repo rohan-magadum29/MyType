@@ -3,6 +3,8 @@ import Navbar from "./NavBar";
 import { useState } from "react";
 import WPMDisplay from "./WPMDisplay";
 import LeaderBoard from "./LeaderBoard";
+import TimerSelector from "./TimerSelector";
+import TimerContextProvider from "../contexts/TimerContextProvider";
 const Home = ({ ChangeState,user}) => {
   
   return (
@@ -19,6 +21,7 @@ const Home = ({ ChangeState,user}) => {
         </button>
       </div>
       <WPMDisplay userEmail={user.email}/>
+      <TimerSelector />
       <LeaderBoard username={user.username}/>
     </div>
   );
