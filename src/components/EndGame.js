@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "axios";
+import TimerSelector from "./TimerSelector";
 const EndGame = (props) => {
   const score = props.props.score;
   const time = props.props.time;
@@ -51,6 +52,7 @@ const EndGame = (props) => {
           Home
         </button>
       </div>
+      <TimerSelector />
     </div>
   );
 };

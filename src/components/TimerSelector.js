@@ -10,7 +10,7 @@ const TimerSelector = () => {
   };
 
   return (
-    <div className="timer-radio">
+    <div className="timer-selector">
       <input
         type="radio"
         value={15}

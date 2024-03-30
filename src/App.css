@@ -5,7 +5,7 @@
 }
 .btnPlay{
 font-size: 2.5rem;
-margin: 20px;
+margin: 40px;
 border-radius: 15px;
 padding: 5px 25px;
 background-color: rgb(70, 70, 70);
@@ -47,7 +47,7 @@ background-color: rgb(70, 70, 70);
   color : rgb(255, 0, 0);
 }
 .title {
-  font-size: 5rem;
+  font-size: 8rem;
   display: inline-block;
   margin:20px;
 }
@@ -155,15 +155,18 @@ background-color: rgb(70, 70, 70);
 .greeting p {
   display : inline-block;
 }
-.timer-radio {
+.timer-selector {
   font-size: 20px;
+  margin-top: 40px;
 }
+
 .WPM {
   font-size: 16px;
   font-weight: bold;
 }
 .leaderboard {
   text-align: center;
+  margin-top: 100px;
 }
 .leaderboard-table{
   margin: 0 auto;
