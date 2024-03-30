@@ -19,11 +19,9 @@ const LeaderBoard = (userName) => {
     },[]);
     const isPlayer = (username) => {
         if(username === userName.username){
-            console.log(userName.username);
             return "current-user";
         }
         else {
-            console.log(userName.username);
             return "other-user";
         }
     }

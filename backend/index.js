@@ -1,6 +1,7 @@
 const express = require("express")
 const cors = require("cors")
 const mongoose = require("mongoose")
+const axios = require("axios")
 
 const app = express()
 app.use(express.json())
@@ -118,5 +119,17 @@ app.get("/leaderboard",async (req,res) => {
     {
         console.log("Error fetching leaderboard",error);
         res.status(500).json({message:"Internal Server Error"})
+    }
+})
+
+app.get("/paragraph",async (req,res)=>{
+    try {
+        const response = await axios.get("http://metaphorpsum.com/paragraphs/3/4");
+        const para = response.data;
+        res.json(para);
+        
+    } catch (error) {
+        console.error("Error fetching random text:", error);
+        res.status(500).json({ error: "Error fetching random text" });
     }
 })

@@ -10,7 +10,6 @@ const WPMDisplay = ({ userEmail ,currentstate}) => {
         params: { email: userEmail },
       });
       setGames(response.data);
-      console.log(games);
     } catch (error) {
       console.error("Error Fetching Games", error);
     }

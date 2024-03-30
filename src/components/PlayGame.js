@@ -2,12 +2,25 @@ import React, { useContext } from "react";
 import { useEffect, useRef, useState } from "react";
 import Navbar from "./NavBar";
 import TimerContext from "../contexts/TimerContext";
+import axios from "axios";
 
-const PlayGame = ({ChangeState,user}) => {
-  
-  const [defaultData] = useState(
-    "As I sit in my room late at night, staring at the computer screen, I decide it would be a good idea to create this text. There isn't much meaning to it, other than to get some simple practice. A lot of the texts that have been created are rather short, and don't give a good representation of actual typing speed and accuracy. They lack the length to gauge where your strengths and weaknesses are when typing."
-  );
+const PlayGame = ({ ChangeState, user }) => {
+  const [para, setParagraph] = useState("");
+  useEffect(() => {
+    const fetchPara = async () => {
+      try {
+        const response = await axios.get("http://localhost:9002/paragraph");
+        console.log(response.data);
+        setParagraph(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchPara();
+  }, []);
+  // const [defaultData] = useState(
+  //   "As I sit in my room late at night, staring at the computer screen, I decide it would be a good idea to create this text. There isn't much meaning to it, other than to get some simple practice. A lot of the texts that have been created are rather short, and don't give a good representation of actual typing speed and accuracy. They lack the length to gauge where your strengths and weaknesses are when typing."
+  // );
   const [TypingData, setTypingData] = useState([]);
   const [UserTyping, setUserTyping] = useState({
     value: "",
@@ -15,10 +28,10 @@ const PlayGame = ({ChangeState,user}) => {
   });
   const inputBox = useRef(null);
   const [score, setScore] = useState({
-    right : 0,
-    wrong : 0
+    right: 0,
+    wrong: 0,
   });
-  const {selectedTime} = useContext(TimerContext);
+  const { selectedTime } = useContext(TimerContext);
   const time = selectedTime;
   const [timer, setTimer] = useState(time);
   const resetTimer = () => {
@@ -31,8 +44,12 @@ const PlayGame = ({ChangeState,user}) => {
           return prevTimer - 1;
         } else {
           clearInterval(intervalId);
-          ChangeState("endGame",{
-            score,ChangeState,resetTimer,time,user
+          ChangeState("endGame", {
+            score,
+            ChangeState,
+            resetTimer,
+            time,
+            user,
           });
           return 0;
         }
@@ -55,23 +72,26 @@ const PlayGame = ({ChangeState,user}) => {
   };
   useEffect(() => {
     inputBox.current.focus();
-    const addWord = (quantity = 30) => {
-      const arrayDefaultDB = defaultData.split(" ");
-      const TypingDataPara = [];
-      for (let index = 0; index < quantity; index++) {
-        const position = Math.floor(Math.random() * arrayDefaultDB.length);
-        TypingDataPara.push({
-          value: arrayDefaultDB[position],
-          status: null,
-        });
+    const addWord = (startIndex) => {
+      if (para !== "") {
+        const arrayDefaultDB = para.split(" ");
+        const TypingDataPara = [];
+        const quantity = arrayDefaultDB.length/2;
+        for (let index = startIndex; index < quantity; index++) {
+          // const position = Math.floor(Math.random() * arrayDefaultDB.length);
+          TypingDataPara.push({
+            value: arrayDefaultDB[index],
+            status: null,
+          });
+        }
+        setTypingData(TypingDataPara);
       }
-      setTypingData(TypingDataPara);
     };
     if (TypingData.length === 0 || UserTyping.position >= TypingData.length) {
-      addWord();
+      addWord(UserTyping.position);
       setUserTyping({ ...UserTyping, position: 0 });
     }
-  }, [UserTyping.position]);
+  }, [UserTyping.position, para]);
   const handleChangeTyping = (e) => {
     const valueInput = e.target.value;
     if (!valueInput.includes(" ")) {
@@ -102,20 +122,21 @@ const PlayGame = ({ChangeState,user}) => {
   return (
     <div className="playing">
       <ul className="list">
-        {TypingData.map((word, index) => (
-          <li
-            key={index}
-            className={
-              word.status === true
-                ? "true"
-                : word.status === false
-                ? "false"
-                : ""
-            }
-          >
-            {word.value}
-          </li>
-        ))}
+        {TypingData.length > 0 &&
+          TypingData.map((word, index) => (
+            <li
+              key={index}
+              className={
+                word.status === true
+                  ? "true"
+                  : word.status === false
+                  ? "false"
+                  : ""
+              }
+            >
+              {word.value}
+            </li>
+          ))}
       </ul>
       <div timer>{timer}</div>
       <div className="inputForm">
