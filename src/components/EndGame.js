@@ -20,12 +20,13 @@ const EndGame = (props) => {
     accuracy = 0;
   }
   let speed = (rightScore + wrongScore) / (time / 60);
+  let effectiveSpeed = rightScore / (time / 60);
   const storeGameData = async () => {
     const gameData = {
       username:user.username,
       email: user.email,
       accuracy,
-      speed,
+      speed: effectiveSpeed,
     };
     try {
       const response = axios.post("http://localhost:9002/game", gameData);
@@ -40,7 +41,7 @@ const EndGame = (props) => {
         <div className="stats-txt">Accuracy - {accuracy + "%"}</div>
         <div className="stats-txt">Speed - {speed + "WPM"}</div>
         <div className="stats-txt">
-          Effectiveness - {rightScore / (time / 60) + "WPM"}
+          Effectiveness - {effectiveSpeed + "WPM"}
         </div>
       </div>
       <div>
