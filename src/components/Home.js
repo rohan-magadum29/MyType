@@ -5,7 +5,7 @@ import WPMDisplay from "./WPMDisplay";
 import LeaderBoard from "./LeaderBoard";
 import TimerSelector from "./TimerSelector";
 import TimerContextProvider from "../contexts/TimerContextProvider";
-import { WpmChart } from "./WpmChart";
+import WpmChart from "./WpmChart";
 const Home = ({ ChangeState,user}) => {
   
   return (
@@ -25,7 +25,7 @@ const Home = ({ ChangeState,user}) => {
       <TimerSelector />
       {/* <LeaderBoard username={user.username}/> */}
       <div className="WpmChart-container" >
-        <WpmChart />
+        <WpmChart userEmail={user.email}/>
       </div>
     </div>
   );

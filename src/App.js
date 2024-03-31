@@ -11,6 +11,7 @@ import Navbar from "./components/NavBar.js";
 import WPMDisplay from "./components/WPMDisplay.js";
 import TimerContext from "./contexts/TimerContext.js";
 import TimerContextProvider from "./contexts/TimerContextProvider.jsx";
+import LeaderBoard from "./components/LeaderBoard.js";
 function App() {
   const [user, setLoginUser] = useState(null);
   const [statusGame, setStatusGame] = useState("home");
@@ -46,6 +47,9 @@ function App() {
     case "register":
       layout = <Register ChangeState={handleChangeStatusGame} props={props} />;
       break;
+    case "leaderboard":
+      layout = <LeaderBoard username={user.username}/>
+      break;
     case "home":
       if (user && user._id) {
         layout = (
@@ -70,7 +74,7 @@ function App() {
     <TimerContextProvider>
       <div className="App">
         {user ? (
-          <Navbar ChangeState={handleChangeStatusGame} user={user} />
+          <Navbar ChangeState={handleChangeStatusGame} currentState= {statusGame} user={user} setLoginUser={setLoginUser}/>
         ) : (
           <div></div>
         )}

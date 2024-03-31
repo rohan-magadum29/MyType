@@ -7,7 +7,6 @@ const LeaderBoard = (userName) => {
         const fetchLeaderboard = async () =>{
             try {
                 const response = await axios.get("http://localhost:9002/leaderboard");
-                console.log(response.data)
 
                  const leaderboardData = response.data;
                 setLeaderboard(leaderboardData);
