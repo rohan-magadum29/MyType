@@ -7,7 +7,9 @@ const LeaderBoard = (userName) => {
         const fetchLeaderboard = async () =>{
             try {
                 const response = await axios.get("http://localhost:9002/leaderboard");
-                const leaderboardData = response.data;
+                console.log(response.data)
+
+                 const leaderboardData = response.data;
                 setLeaderboard(leaderboardData);
             }
             catch(error)
@@ -41,7 +43,7 @@ const LeaderBoard = (userName) => {
             <tr key={index} className={isPlayer(player.username)}>
               <td className="leaderboard-data">{index + 1}</td>
               <td className="leaderboard-data">{player.username}</td>
-              <td className="leaderboard-data">{player.speed}</td>
+              <td className="leaderboard-data">{player.averageWPM}</td>
             </tr>
           ))}
         </tbody>

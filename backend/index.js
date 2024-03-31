@@ -84,7 +84,15 @@ app.post("/register",(req,res)=>{
 app.listen(9002,()=>{
     console.log("Started at port 9002")
 })
-
+app.get("/users",async (req,res)=>{
+    try {
+        const users = await User.find()
+        res.json(users);
+    }
+    catch (error){
+        console.log(error)
+    }
+})
 app.post("/game",async (req,res) => {
     try {
         const {username,email,accuracy,speed} = req.body;
@@ -111,19 +119,40 @@ app.get("/games",async (req,res) => {
 
 app.get("/leaderboard",async (req,res) => {
     try {
-        const games = await Game.find().sort({speed:-1}).limit(10);
-        const leaderboard = games.map((game,index)=>({
-            rank : index + 1,
-            username:game.username,
-            speed:game.speed
-        }));
+        const users = await User.find()
+        const leaderboard = []
+        for (const user of users)
+        {
+            const recentGames = await Game.find({email:user.email}).sort({createdAt:-1}).limit(10);
+            let totalWPM = 0;
+            recentGames.forEach(game => {
+                totalWPM += game.speed
+            });
+            const averageWPM = recentGames.length > 0 ? Math.round(totalWPM /recentGames.length) : 0; 
+            
+            leaderboard.push({username:user.username , averageWPM});
+        }
+        leaderboard.sort((a, b) => b.averageWPM - a.averageWPM);
         res.json(leaderboard)
+        
     }
-    catch(error)
-    {
-        console.log("Error fetching leaderboard",error);
-        res.status(500).json({message:"Internal Server Error"})
+    catch(error) {
+        console.log(error)
     }
+    // try {
+    //     const games = await Game.find().sort({speed:-1}).limit(10);
+    //     const leaderboard = games.map((game,index)=>({
+    //         rank : index + 1,
+    //         username:game.username,
+    //         speed:game.speed
+    //     }));
+    //     res.json(leaderboard)
+    // }
+    // catch(error)
+    // {
+    //     console.log("Error fetching leaderboard",error);
+    //     res.status(500).json({message:"Internal Server Error"})
+    // }
 })
 
 app.get("/paragraph",async (req,res)=>{
