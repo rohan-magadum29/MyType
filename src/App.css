@@ -194,3 +194,8 @@ background-color: rgb(70, 70, 70);
   border-radius: 10px;
   background-color: rgb(70, 70, 70);
 }
+.WpmChart-container {
+  margin: 50px auto; 
+  width: 1500px; 
+}
+  
