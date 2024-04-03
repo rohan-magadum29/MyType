@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import Navbar from "./NavBar";
 import TimerContext from "../contexts/TimerContext";
 import axios from "axios";
+import { useDeathMode } from "../contexts/DeathModeContext";
+import { useSound } from "../contexts/SoundPlayerContext";
 
 const PlayGame = ({ ChangeState, user }) => {
   const [para, setParagraph] = useState("");
@@ -21,6 +23,8 @@ const PlayGame = ({ ChangeState, user }) => {
   // const [defaultData] = useState(
   //   "As I sit in my room late at night, staring at the computer screen, I decide it would be a good idea to create this text. There isn't much meaning to it, other than to get some simple practice. A lot of the texts that have been created are rather short, and don't give a good representation of actual typing speed and accuracy. They lack the length to gauge where your strengths and weaknesses are when typing."
   // );
+  const {playWrongSound} = useSound()
+  const {isDeathMode} = useDeathMode();
   const [TypingData, setTypingData] = useState([]);
   const [UserTyping, setUserTyping] = useState({
     value: "",
@@ -37,10 +41,26 @@ const PlayGame = ({ ChangeState, user }) => {
   const resetTimer = () => {
     setTimer(time);
   };
+
   useEffect(() => {
     const intervalId = setInterval(() => {
       setTimer((prevTimer) => {
         if (prevTimer > 0) {
+          if(isDeathMode == true)
+          {
+            console.log("Is Death Mode")
+            if(score.wrong > 0)
+            {
+            console.log("End Game")
+              ChangeState("endGame", {
+                score,
+                ChangeState,
+                resetTimer,
+                time,
+                user,
+              });
+            }
+          }
           return prevTimer - 1;
         } else {
           clearInterval(intervalId);
@@ -56,7 +76,7 @@ const PlayGame = ({ ChangeState, user }) => {
       });
     }, 1000);
     return () => clearInterval(intervalId);
-  }, [timer]);
+  }, [timer,score]);
   const handleChangeScore = (type) => {
     if (type === "right") {
       setScore({
@@ -68,6 +88,7 @@ const PlayGame = ({ ChangeState, user }) => {
         ...score,
         wrong: score.wrong + 1,
       });
+      playWrongSound()
     }
   };
   useEffect(() => {
@@ -148,6 +169,7 @@ const PlayGame = ({ ChangeState, user }) => {
         />
       </div>
     </div>
+
   );
 };
 export default PlayGame;

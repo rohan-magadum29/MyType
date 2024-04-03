@@ -39,9 +39,9 @@ const EndGame = (props) => {
     <div className="endgame">
       <div className="stats">
         <div className="stats-txt">Accuracy - {accuracy + "%"}</div>
-        <div className="stats-txt">Speed - {speed + "WPM"}</div>
+        <div className="stats-txt">Raw - {speed + "WPM"}</div>
         <div className="stats-txt">
-          Effectiveness - {effectiveSpeed + "WPM"}
+          Speed - {effectiveSpeed + "WPM"}
         </div>
       </div>
       <div>

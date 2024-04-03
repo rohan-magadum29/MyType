@@ -26,7 +26,7 @@ background-color: rgb(70, 70, 70);
 }
 .playing li{
   display : inline-block;
-  font-size: 2rem;
+  font-size: 1.75rem;
   padding:10px;
   text-shadow: 0 2px 2px black;
   position:relative;
@@ -138,8 +138,6 @@ background-color: rgb(70, 70, 70);
   margin:10px;
 }
 .navbar {
-  display: flex;
-  justify-content: end;
   padding: 5px;
 }
 .navbar button {
@@ -198,4 +196,16 @@ background-color: rgb(70, 70, 70);
   margin: 50px auto; 
   width: 1200px; 
 }
-  
+/* styles.css */
+.greeting {
+  display: flex;
+  justify-content: space-between;
+}
+.greeting p{
+  padding: 10px;
+  margin-left: 20px;
+  font-size: 20px;
+  border: 2px solid rgb(255, 255, 255);
+  box-shadow: 4px 2px 7px rgb(108, 108, 108);
+  border-radius: 15px;
+}
