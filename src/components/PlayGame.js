@@ -46,21 +46,7 @@ const PlayGame = ({ ChangeState, user }) => {
     const intervalId = setInterval(() => {
       setTimer((prevTimer) => {
         if (prevTimer > 0) {
-          if(isDeathMode == true)
-          {
-            console.log("Is Death Mode")
-            if(score.wrong > 0)
-            {
-            console.log("End Game")
-              ChangeState("endGame", {
-                score,
-                ChangeState,
-                resetTimer,
-                time,
-                user,
-              });
-            }
-          }
+          
           return prevTimer - 1;
         } else {
           clearInterval(intervalId);
@@ -76,7 +62,7 @@ const PlayGame = ({ ChangeState, user }) => {
       });
     }, 1000);
     return () => clearInterval(intervalId);
-  }, [timer,score]);
+  }, [timer]);
   const handleChangeScore = (type) => {
     if (type === "right") {
       setScore({
@@ -140,6 +126,23 @@ const PlayGame = ({ ChangeState, user }) => {
       position: UserTyping.position + 1,
     });
   };
+  useEffect(()=>{
+    if(isDeathMode == true)
+          {
+            console.log("Is Death Mode")
+            if(score.wrong > 0)
+            {
+            console.log("End Game")
+              ChangeState("endGame", {
+                score,
+                ChangeState,
+                resetTimer,
+                time,
+                user,
+              });
+            }
+          }
+  },[score])
   return (
     <div className="playing">
       <ul className="list">
