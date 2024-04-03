@@ -13,6 +13,7 @@ import {
 
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useGameCount } from "../contexts/GameCountContext";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -24,6 +25,7 @@ ChartJS.register(
 );
 
 const WpmChart = ({ userEmail }) => {
+  const {gameCount} = useGameCount()
   const [chartData, setChartData] = useState(null);
   const [isMounted, setIsMounted] = useState(false);
   const fetchWPM = async () => {
@@ -51,11 +53,6 @@ const WpmChart = ({ userEmail }) => {
     }
   };
   useEffect(() => {
-    setIsMounted(true);
-    return () => setIsMounted(false);
-  }, []);
-
-  useEffect(() => {
     const fetch = async () => {
       try {
         const data = await fetchWPM();
@@ -64,10 +61,8 @@ const WpmChart = ({ userEmail }) => {
         console.log(error);
       }
     };
-    if (isMounted) {
-      fetch();
-    }
-  }, [isMounted]);
+    fetch()
+  },[gameCount]);
   const options = {
     plugins: {
       legend: {

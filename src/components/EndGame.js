@@ -1,18 +1,20 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import TimerSelector from "./TimerSelector";
+import { useGameCount } from "../contexts/GameCountContext";
 const EndGame = (props) => {
   const score = props.props.score;
   const time = props.props.time;
   const resetTimer = props.props.resetTimer;
   const ChangeState = props.props.ChangeState;
   const user = props.props.user;
+  const {incrementGameCount} = useGameCount()
   const handlePlayAgain = () => {
     resetTimer();
     ChangeState("playGame");
     storeGameData();
   };
-
+  
   const rightScore = score.right;
   const wrongScore = score.wrong;
   let accuracy = ((rightScore / (rightScore + wrongScore)) * 100).toFixed(0);
@@ -35,6 +37,9 @@ const EndGame = (props) => {
       console.log("Error Storing Game Data", error);
     }
   };
+  useEffect(()=>{
+    incrementGameCount();
+  },[])
   return (
     <div className="endgame">
       <div className="stats">

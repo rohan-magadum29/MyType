@@ -109,7 +109,7 @@ app.post("/game",async (req,res) => {
 app.get("/games",async (req,res) => {
     const {email} = req.query;
     try {
-        const recentGames = await Game.find({email}).sort({createdAt:-1}).limit(10);
+        const recentGames = await Game.find({email}).sort().limit(10);
         res.json(recentGames);
     }
     catch(error){

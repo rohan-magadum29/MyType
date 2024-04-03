@@ -14,6 +14,7 @@ import TimerContextProvider from "./contexts/TimerContextProvider.jsx";
 import LeaderBoard from "./components/LeaderBoard.js";
 import { DeathModeProvider } from "./contexts/DeathModeContext.js";
 import { SoundProvider } from "./contexts/SoundPlayerContext.js";
+import { GameCountProvider } from "./contexts/GameCountContext.js";
 function App() {
   const [user, setLoginUser] = useState(null);
   const [statusGame, setStatusGame] = useState("home");
@@ -76,7 +77,8 @@ function App() {
     <TimerContextProvider>
       <DeathModeProvider>
         <SoundProvider>
-        <div className="App">
+          <GameCountProvider>
+          <div className="App">
           {user ? (
             <Navbar
               ChangeState={handleChangeStatusGame}
@@ -89,6 +91,7 @@ function App() {
           )}
           {layout}
         </div>
+          </GameCountProvider>
         </SoundProvider>
       </DeathModeProvider>
     </TimerContextProvider>
