@@ -209,3 +209,15 @@ background-color: rgb(70, 70, 70);
   box-shadow: 4px 2px 7px rgb(108, 108, 108);
   border-radius: 15px;
 }
+.timer-selector button{
+  margin: 5px;
+  border-radius: 7px;
+}
+.timer-selector button.selected{
+  padding: 10px 15px;
+  box-shadow: 2px 4px 5px white;
+}
+.timer-selector button.unselected{
+  padding: 5px;
+  box-shadow: none;
+}
